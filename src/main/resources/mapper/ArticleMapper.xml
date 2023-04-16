@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fiee.fieeblog.mapper.ArticleMapper">
+
+    <resultMap id="ArticleHomeMap" type="com.fiee.fieeblog.dto.ArticleHomeDTO">
+        <id column="id" property="id"/>
+        <result column="article_cover" property="articleCover"/>
+        <result column="article_title" property="articleTitle"/>
+        <result column="article_content" property="articleContent"/>
+        <result column="create_time" property="createTime"/>
+        <result column="type" property="type"/>
+        <result column="is_top" property="isTop"/>
+        <result column="category_id" property="categoryId"/>
+        <result column="category_name" property="categoryName"/>
+        <collection property="tagDTOList" ofType="com.fiee.fieeblog.dto.TagDTO">
+            <id column="tag_id" property="id"/>
+            <result column="tag_name" property="tagName"/>
+        </collection>
+    </resultMap>
+
+    <select id="homeArticleList" resultMap="ArticleHomeMap">
+        SELECT
+               a.id,
+               article_cover,
+               article_title,
+               SUBSTR( article_content, 1, 500 ) AS article_content,
+               a.create_time,
+               a.type,
+               a.is_top,
+               a.category_id,
+               category_name,
+               t.id AS tag_id,
+               t.tag_name
+        FROM (SELECT id,
+                     article_cover,
+                     article_title,
+                     article_content,
+                     type,
+                     is_top,
+                     create_time,
+                     category_id
+              FROM tb_article
+              WHERE is_delete = 0
+                AND status = 1
+              ORDER BY is_top DESC,
+                       id DESC) a
+                 JOIN tb_category c ON a.category_id = c.id
+                 JOIN tb_article_tag atg ON a.id = atg.article_id
+                 JOIN tb_tag t ON atg.tag_id = t.id
+        ORDER BY is_top DESC,
+                 id DESC
+    </select>
+</mapper>

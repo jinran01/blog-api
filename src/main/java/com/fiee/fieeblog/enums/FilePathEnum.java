@@ -1,0 +1,34 @@
+package com.fiee.fieeblog.enums;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+/**
+ * @Author: Fiee
+ * @ClassName: FilePathEnum
+ * @Date: 2023/4/5
+ * @Version: v1.0.0
+ **/
+@Getter
+@AllArgsConstructor
+public enum FilePathEnum {
+
+    /**
+     * 头像路径
+     */
+    AVATAR("avatar/","头像路径"),
+
+    /**
+     * 网站配置图片路径
+     */
+    CONFIG("config/","配置图片路径"),
+
+    /**
+     * 页面图片路径
+     */
+    PAGES("pages/","页面图片路径");
+
+    private String path;
+
+    private String desc;
+}
