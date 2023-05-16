@@ -62,7 +62,6 @@ public class OptLogAspect {
         //获取请求的方法
         String methodName = method.getName();
         methodName = className + "." + methodName;
-        System.out.println(methodName);
         //操作模块
         operationLog.setOptModule(api.tags()[0]);
         //操作类型

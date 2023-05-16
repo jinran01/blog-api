@@ -1,4 +1,4 @@
-package com.fiee.fieeblog.service.Impl;
+package com.fiee.fieeblog.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;

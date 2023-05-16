@@ -1,4 +1,4 @@
-package com.fiee.fieeblog.service.Impl;
+package com.fiee.fieeblog.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.fiee.fieeblog.entity.FriendLink;

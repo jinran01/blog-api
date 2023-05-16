@@ -33,7 +33,7 @@ public class OssUtils {
         byte[] binaryData = postPolicy.getBytes("utf-8");
         String encodedPolicy = BinaryUtil.toBase64String(binaryData);
         String postSignature = ossClient.calculatePostSignature(postPolicy);
-        respMap.put("accessKeyId","LTAI5tDjnQkzfmBZ8kJSjaak");
+        respMap.put("accessKeyId",accessKeyId);
         respMap.put("policy",encodedPolicy);
         respMap.put("signature",postSignature);
         respMap.put("dir",path);

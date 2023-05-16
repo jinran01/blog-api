@@ -1,8 +1,12 @@
 package com.fiee.fieeblog.service;
 
+import com.fiee.fieeblog.dto.ArticleBackDTO;
 import com.fiee.fieeblog.dto.ArticleHomeDTO;
 import com.fiee.fieeblog.entity.Article;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.fiee.fieeblog.vo.ArticleVO;
+import com.fiee.fieeblog.vo.ConditionVO;
+import com.fiee.fieeblog.vo.PageResult;
 
 import java.util.List;
 
@@ -14,4 +18,10 @@ import java.util.List;
 public interface ArticleService extends IService<Article> {
 
     List<ArticleHomeDTO> getHomeArticles();
+
+    boolean saveOrUpdateArticle(ArticleVO articleVO);
+
+    ArticleVO getArticleById(Integer id);
+
+    PageResult<ArticleBackDTO> getBackArticle(ConditionVO vo);
 }

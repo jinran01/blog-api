@@ -1,4 +1,4 @@
-package com.fiee.fieeblog.service.Impl;
+package com.fiee.fieeblog.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -49,7 +49,7 @@ public class WebsiteConfigServiceImpl extends ServiceImpl<WebsiteConfigMapper, W
             //从redis获取数据
             websiteConfigVO = JSON.parseObject(webConfig.toString(), WebsiteConfigVO.class);
         } else {
-            WebsiteConfig config = this.getById(DEFAULT_BATCH_SIZE);
+            WebsiteConfig config = this.getById(1);
             String websiteConfig = config.getConfig();
             websiteConfigVO = JSON.parseObject(websiteConfig, WebsiteConfigVO.class);
             redisService.set(WEBSITE_CONFIG, websiteConfig);

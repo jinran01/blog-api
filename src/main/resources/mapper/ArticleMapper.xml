@@ -20,6 +20,22 @@
         </collection>
     </resultMap>
 
+    <resultMap id="ArticleBackMap" type="com.fiee.fieeblog.dto.ArticleBackDTO">
+        <id column="id" property="id"/>
+        <result column="article_cover" property="articleCover"/>
+        <result column="article_title" property="articleTitle"/>
+        <result column="create_time" property="createTime"/>
+        <result column="type" property="type"/>
+        <result column="is_top" property="isTop"/>
+        <result column="is_delete" property="isDelete"/>
+        <result column="status" property="status"/>
+        <result column="category_name" property="categoryName"/>
+        <collection property="tagDTOList" ofType="com.fiee.fieeblog.dto.TagDTO">
+            <id column="tag_id" property="id"/>
+            <result column="tag_name" property="tagName"/>
+        </collection>
+    </resultMap>
+
     <select id="homeArticleList" resultMap="ArticleHomeMap">
         SELECT
                a.id,
@@ -51,5 +67,26 @@
                  JOIN tb_tag t ON atg.tag_id = t.id
         ORDER BY is_top DESC,
                  id DESC
+    </select>
+
+    <select id="backArticleList" resultMap="ArticleBackMap">
+        select
+            a.id,
+            article_cover,
+            article_title,
+            type,
+            is_top,
+            is_delete,
+            status,
+            a.create_time,
+            c.category_name,
+            t.id tag_id,
+            t.tag_name
+        from
+            tb_article as a
+        LEFT JOIN tb_category as c on c.id = a.category_id
+        LEFT JOIN tb_article_tag as tat on tat.article_id = a.id
+        LEFT JOIN tb_tag as t on tat.tag_id = t.id
+        LIMIT #{vo.current},#{vo.size}
     </select>
 </mapper>

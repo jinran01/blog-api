@@ -1,4 +1,4 @@
-package com.fiee.fieeblog.service.Impl;
+package com.fiee.fieeblog.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -20,7 +20,6 @@ import com.fiee.fieeblog.service.UserRoleService;
 import com.fiee.fieeblog.vo.ConditionVO;
 import com.fiee.fieeblog.vo.PageResult;
 import org.springframework.amqp.core.Message;
-import org.springframework.amqp.core.MessagePostProcessor;
 import org.springframework.amqp.core.MessageProperties;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -26,7 +26,23 @@ public enum FilePathEnum {
     /**
      * 页面图片路径
      */
-    PAGES("pages/","页面图片路径");
+    PAGES("pages/","页面图片路径"),
+
+    /**
+     * 相册封面
+     */
+    ALBUM("album/","相册封面路径"),
+
+    /**
+     * 相片
+     */
+    PHOTO("photo/","相片路径"),
+
+    /**
+     * 文章
+     */
+    ARTICLE_COVER("articles/","文章封面路径");
+
 
     private String path;
 

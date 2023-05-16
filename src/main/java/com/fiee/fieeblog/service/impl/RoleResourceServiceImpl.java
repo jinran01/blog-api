@@ -1,10 +1,9 @@
-package com.fiee.fieeblog.service.Impl;
+package com.fiee.fieeblog.service.impl;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.fiee.fieeblog.entity.Role;
-import com.fiee.fieeblog.entity.RoleMenu;
 import com.fiee.fieeblog.entity.RoleResource;
 import com.fiee.fieeblog.mapper.RoleResourceMapper;
 import com.fiee.fieeblog.service.RoleResourceService;

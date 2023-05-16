@@ -1,4 +1,4 @@
-package com.fiee.fieeblog.service.Impl;
+package com.fiee.fieeblog.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
@@ -11,7 +11,6 @@ import com.fiee.fieeblog.service.RoleService;
 import com.fiee.fieeblog.service.UserAuthService;
 import com.fiee.fieeblog.service.UserInfoService;
 import com.fiee.fieeblog.utils.IpUtils;
-import com.fiee.fieeblog.utils.JwtUtil;
 import eu.bitwalker.useragentutils.UserAgent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

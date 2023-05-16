@@ -1,15 +1,13 @@
-package com.fiee.fieeblog.service.Impl;
+package com.fiee.fieeblog.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.fiee.fieeblog.dto.MessageDTO;
 import com.fiee.fieeblog.entity.Message;
 import com.fiee.fieeblog.service.MessageService;
 import com.fiee.fieeblog.mapper.MessageMapper;
 import com.fiee.fieeblog.utils.IpUtils;
 import com.fiee.fieeblog.vo.ConditionVO;
 import com.fiee.fieeblog.vo.PageResult;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
