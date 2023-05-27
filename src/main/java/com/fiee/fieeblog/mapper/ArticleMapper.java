@@ -1,9 +1,11 @@
 package com.fiee.fieeblog.mapper;
 
 import com.fiee.fieeblog.dto.ArticleBackDTO;
+import com.fiee.fieeblog.dto.ArticleDTO;
 import com.fiee.fieeblog.dto.ArticleHomeDTO;
 import com.fiee.fieeblog.entity.Article;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.fiee.fieeblog.vo.ArticleVO;
 import com.fiee.fieeblog.vo.ConditionVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -21,6 +23,10 @@ public interface ArticleMapper extends BaseMapper<Article> {
     List<ArticleHomeDTO> homeArticleList();
 
     List<ArticleBackDTO> backArticleList(@Param("vo") ConditionVO vo,Long current,Long size);
+
+    Integer getCount(@Param("vo") ConditionVO vo);
+
+    ArticleDTO getArticleById(Integer id);
 }
 
 

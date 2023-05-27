@@ -2,6 +2,11 @@ package com.fiee.fieeblog.service;
 
 import com.fiee.fieeblog.entity.Category;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.fiee.fieeblog.vo.CategoryVO;
+import com.fiee.fieeblog.vo.ConditionVO;
+import com.fiee.fieeblog.vo.PageResult;
+
+import java.util.List;
 
 /**
 * @author Fiee
@@ -10,4 +15,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface CategoryService extends IService<Category> {
 
+    PageResult<CategoryVO> getCategoryList(ConditionVO vo);
+
+    boolean removeBatch(List<Category> categories);
 }

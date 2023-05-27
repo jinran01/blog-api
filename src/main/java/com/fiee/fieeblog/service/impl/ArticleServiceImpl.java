@@ -4,11 +4,13 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.fiee.fieeblog.dto.ArticleBackDTO;
+import com.fiee.fieeblog.dto.ArticleDTO;
 import com.fiee.fieeblog.dto.ArticleHomeDTO;
 import com.fiee.fieeblog.entity.Article;
 import com.fiee.fieeblog.entity.ArticleTag;
 import com.fiee.fieeblog.entity.Category;
 import com.fiee.fieeblog.entity.Tag;
+import com.fiee.fieeblog.mapper.TagMapper;
 import com.fiee.fieeblog.service.ArticleService;
 import com.fiee.fieeblog.mapper.ArticleMapper;
 import com.fiee.fieeblog.service.ArticleTagService;
@@ -24,7 +26,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
-import java.util.Collection;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -45,6 +47,9 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article>
 
     @Autowired
     private ArticleTagService articleTagService;
+
+    @Autowired
+    private TagMapper tagMapper;
 
     @Autowired
     private TagService tagService;
@@ -69,7 +74,6 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article>
     public boolean saveOrUpdateArticle(ArticleVO vo) {
         //保存分类
         Category category = saveArticleCategory(vo);
-        System.out.println(category);
         //保存或者修改文章
         Article article = BeanCopyUtils.copyObject(vo, Article.class);
         //设置分类id
@@ -82,6 +86,30 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article>
         //保存标签
         saveArticleTag(vo, article.getId());
         return true;
+    }
+
+    /**
+     * 根据id查看后台文章
+     * @param articleId
+     * @return
+     */
+    @Override
+    public ArticleVO getArticleBackById(Integer articleId) {
+        // 查询文章信息
+        Article article = baseMapper.selectById(articleId);
+        // 查询文章分类
+        Category category = categoryService.getById(article.getCategoryId());
+        String categoryName = null;
+        if (Objects.nonNull(category)) {
+            categoryName = category.getCategoryName();
+        }
+        // 查询文章标签
+        List<String> tagNameList = tagMapper.listTagNameByArticleId(articleId);
+        // 封装数据
+        ArticleVO articleVO = BeanCopyUtils.copyObject(article, ArticleVO.class);
+        articleVO.setCategoryName(categoryName);
+        articleVO.setTagNameList(tagNameList);
+        return articleVO;
     }
 
     /**
@@ -148,13 +176,11 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article>
     }
 
     /**
-     * 根据id查看后台文章
-     *
      * @param id
      * @return
      */
     @Override
-    public ArticleVO getArticleById(Integer id) {
+    public ArticleDTO getArticleById(Integer id) {
         return null;
     }
 
@@ -166,16 +192,28 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article>
     @Override
     public PageResult<ArticleBackDTO> getBackArticle(ConditionVO vo) {
         //查询总条数
-        //TODO 按条件查询
-
-        LambdaQueryWrapper<Article> wrapper = new LambdaQueryWrapper<>();
-
-        Integer count = Math.toIntExact(this.count(null));
+        Integer count = baseMapper.getCount(vo);
 
         List<ArticleBackDTO> articleList =
                 baseMapper.backArticleList(vo, (vo.getCurrent() - 1) * vo.getSize(), vo.getSize());
 
         return new PageResult<>(articleList,count);
+    }
+
+    /**
+     * 物理删除文章
+     * @param articleIds 文章ids
+     * @return
+     */
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public boolean deleteArticle(Long[] articleIds) {
+        //删除该文章绑定的标签 article_tag 表中的内容
+        LambdaQueryWrapper<ArticleTag> wrapper = new LambdaQueryWrapper<>();
+        wrapper.in(ArticleTag::getArticleId,articleIds);
+        articleTagService.remove(wrapper);
+        this.removeByIds(Arrays.asList(articleIds));
+        return false;
     }
 }
 

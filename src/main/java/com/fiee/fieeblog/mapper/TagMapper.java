@@ -2,7 +2,11 @@ package com.fiee.fieeblog.mapper;
 
 import com.fiee.fieeblog.entity.Tag;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.fiee.fieeblog.vo.ConditionVO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
 * @author Fiee
@@ -13,6 +17,9 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface TagMapper extends BaseMapper<Tag> {
 
+    List<String> listTagNameByArticleId(Integer articleId);
+
+    List<Tag> getTagList(@Param("vo") ConditionVO vo,Long current,Long size);
 }
 
 
