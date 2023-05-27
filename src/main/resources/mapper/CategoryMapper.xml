@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fiee.fieeblog.mapper.CategoryMapper">
+
+    <select id="getCategoryList" resultType="com.fiee.fieeblog.entity.Category">
+        select
+            *
+        from
+            tb_category
+        <where>
+            <if test="vo.keywords != null">
+                and category_name like concat("%",#{vo.keywords},"%")
+            </if>
+        </where>
+        limit #{current},#{size}
+    </select>
+</mapper>
