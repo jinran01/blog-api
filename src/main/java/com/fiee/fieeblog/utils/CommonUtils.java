@@ -1,5 +1,7 @@
 package com.fiee.fieeblog.utils;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -42,4 +44,21 @@ public class CommonUtils {
         return str.toString();
     }
 
+    /**
+     * 转换List
+     *
+     * @param obj   obj
+     * @param clazz clazz
+     * @return {@link List <T>}
+     */
+    public static <T> List<T> castList(Object obj, Class<T> clazz) {
+        List<T> result = new ArrayList<T>();
+        if (obj instanceof List<?>) {
+            for (Object o : (List<?>) obj) {
+                result.add(clazz.cast(o));
+            }
+            return result;
+        }
+        return result;
+    }
 }

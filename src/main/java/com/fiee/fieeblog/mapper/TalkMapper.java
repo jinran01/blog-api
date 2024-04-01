@@ -1,8 +1,13 @@
 package com.fiee.fieeblog.mapper;
 
+import com.fiee.fieeblog.dto.TalkBackDTO;
 import com.fiee.fieeblog.entity.Talk;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.fiee.fieeblog.vo.ConditionVO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
 * @author Fiee
@@ -12,7 +17,9 @@ import org.apache.ibatis.annotations.Mapper;
 */
 @Mapper
 public interface TalkMapper extends BaseMapper<Talk> {
+    List<TalkBackDTO> listBackTalks(Long current, Long size, @Param("vo") ConditionVO vo);
 
+    TalkBackDTO getBackTalkById(Integer id);
 }
 
 

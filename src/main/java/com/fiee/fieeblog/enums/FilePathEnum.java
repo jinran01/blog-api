@@ -39,9 +39,14 @@ public enum FilePathEnum {
     PHOTO("photo/","相片路径"),
 
     /**
-     * 文章
+     * 文章封面
      */
-    ARTICLE_COVER("articles/","文章封面路径");
+    ARTICLE_COVER("articles/","文章封面路径"),
+
+    /**
+     * 说说图片
+     */
+    TALK_IMAGES("talks/","说说图片");
 
 
     private String path;

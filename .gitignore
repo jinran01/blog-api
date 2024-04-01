@@ -1,5 +1,5 @@
 /src/main/resources/application-*.yaml
 /src/main/resources/application.yaml
 /spy.log
-
+/target
 /.idea

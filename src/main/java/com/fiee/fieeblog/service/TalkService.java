@@ -1,7 +1,10 @@
 package com.fiee.fieeblog.service;
 
+import com.fiee.fieeblog.dto.TalkBackDTO;
 import com.fiee.fieeblog.entity.Talk;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.fiee.fieeblog.vo.ConditionVO;
+import com.fiee.fieeblog.vo.PageResult;
 
 /**
 * @author Fiee
@@ -11,4 +14,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface TalkService extends IService<Talk> {
 
     boolean saveOrUpdateTalk(Talk talk);
+
+    PageResult<TalkBackDTO> listBackTalks(ConditionVO vo);
+
+    TalkBackDTO getTalkById(Integer id);
 }
